@@ -29,11 +29,23 @@ class Driver {
         graph.addEdge(3, 2);
         graph.addEdge(9, 6);
 
-        System.out.println(graph.getVertexCount());
-        System.out.println(graph.getEdgeCount());
 
+        System.out.println("1 -> 4 -> 7");
+        System.out.println("| \\       |");
+        System.out.println("v  /      v");
+        System.out.println("2 -> 5 -> 8");
+        System.out.println("^    |  \\ |");
+        System.out.println("|    v  / v");
+        System.out.println("3 <- 6 <- 9\n");
+        
+        System.out.print("Breadth First Search: ");
         LinkedList<Integer> breadthFirst = graph.breadthFirstSearch(1);
         for (int number : breadthFirst) {
+            System.out.print(number + " ");
+        }
+        System.out.print("\nDepth First Search: ");
+        LinkedList<Integer> depthFirst = graph.depthFirstSearch(1);
+        for (int number : depthFirst) {
             System.out.print(number + " ");
         }
     }

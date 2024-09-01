@@ -103,16 +103,30 @@ public class Graph<T> {
      *  Then you can move on down to the next child
      *  Goal: 1 2 5 6 3 8 9 4 7
      */
-    public void depthFirstSearch(T startingPoint) {
-        LinkedList<T> breadthFirstList = new LinkedList<>();
+    public LinkedList<T> depthFirstSearch(T startingPoint) {
+        LinkedList<T> depthFirstList = new LinkedList<>();
         Stack<T> nodesVisited = new Stack<>();
 
-        breadthFirstList.add(startingPoint);
+        depthFirstList.add(startingPoint);
         nodesVisited.add(startingPoint);
         while (!nodesVisited.isEmpty()) {
             LinkedList<T> neighbors = getNeighbors(startingPoint);
+            for (int i = 0; i < neighbors.size(); i++) {
+                T neighbor = neighbors.get(i);
 
+                if (!depthFirstList.contains(neighbor)) {
+                    depthFirstList.add(neighbor);
+                    nodesVisited.add(neighbor);
+                    break;
+                }
+
+                if (i == neighbors.size() - 1)
+                    nodesVisited.pop();
+            }
+            if (!nodesVisited.isEmpty())
+                startingPoint = nodesVisited.peek();
         }
+        return depthFirstList;
     }
 }
  
