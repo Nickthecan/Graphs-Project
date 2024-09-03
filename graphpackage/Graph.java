@@ -1,9 +1,7 @@
 package graphpackage;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Queue;
-import java.util.Stack;
+import adtpackage.*;
 
 /*  Adjacency List
  * 
@@ -17,11 +15,11 @@ import java.util.Stack;
  */
 
 public class Graph<T> {
-    private Map<T, LinkedList<T>> map = new HashMap<>();
+    private Map<T, ADTLinkedList<T>> map = new HashMap<>();
 
     //adds a vertex to the map
     public void addVertex(T key) {
-        map.put(key, new LinkedList<T>());
+        map.put(key, new ADTLinkedList<T>());
     }
 
     //adds an edge to the map
@@ -67,7 +65,7 @@ public class Graph<T> {
     }
 
     //returns a list of neighbors the vertex borders
-    public LinkedList<T> getNeighbors(T vertex) {
+    public ADTLinkedList<T> getNeighbors(T vertex) {
         if (map.containsKey(vertex)) {
             return map.get(vertex);
         }
@@ -83,18 +81,18 @@ public class Graph<T> {
      *  Continue until all nodes are visited
      *  GOAL: 1 2 4 5 7 6 8 3 9
      */
-    public LinkedList<T> breadthFirstSearch(T startingPoint) {
-        LinkedList<T> breadthFirstList = new LinkedList<>();
-        Queue<T> nodesVisited = new LinkedList<>();
+    public ADTLinkedList<T> breadthFirstSearch(T startingPoint) {
+        ADTLinkedList<T> breadthFirstList = new ADTLinkedList<>();
+        ADTQueue<T> nodesVisited = new ADTQueue<>();
 
         breadthFirstList.add(startingPoint);
         nodesVisited.add(startingPoint);
         while (!nodesVisited.isEmpty()) {
-            LinkedList<T> neighbors = getNeighbors(startingPoint);
-            for (T neighbor : neighbors) {
-                if (!breadthFirstList.contains(neighbor)) {
-                    breadthFirstList.add(neighbor);
-                    nodesVisited.add(neighbor);
+            ADTLinkedList<T> neighbors = getNeighbors(startingPoint);
+            for (int i = 0; i < neighbors.size(); i++) {
+                if (!breadthFirstList.contains(neighbors.get(i))) {
+                    breadthFirstList.add(neighbors.get(i));
+                    nodesVisited.add(neighbors.get(i));
                 }
             }
             nodesVisited.remove();
@@ -111,20 +109,20 @@ public class Graph<T> {
      *  Then you can move on down to the next child
      *  Goal: 1 2 5 6 3 8 9 4 7
      */
-    public LinkedList<T> depthFirstSearch(T startingPoint) {
-        LinkedList<T> depthFirstList = new LinkedList<>();
-        Stack<T> nodesVisited = new Stack<>();
+    public ADTLinkedList<T> depthFirstSearch(T startingPoint) {
+        ADTLinkedList<T> depthFirstList = new ADTLinkedList<>();
+        ADTStack<T> nodesVisited = new ADTStack<>();
 
         depthFirstList.add(startingPoint);
-        nodesVisited.add(startingPoint);
+        nodesVisited.push(startingPoint);
         while (!nodesVisited.isEmpty()) {
-            LinkedList<T> neighbors = getNeighbors(startingPoint);
+            ADTLinkedList<T> neighbors = getNeighbors(startingPoint);
             for (int i = 0; i < neighbors.size(); i++) {
                 T neighbor = neighbors.get(i);
 
                 if (!depthFirstList.contains(neighbor)) {
                     depthFirstList.add(neighbor);
-                    nodesVisited.add(neighbor);
+                    nodesVisited.push(neighbor);
                     break;
                 }
 

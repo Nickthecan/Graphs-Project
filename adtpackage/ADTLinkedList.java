@@ -24,8 +24,17 @@ public class ADTLinkedList<T> {
     //adds to the head of the list
     public void add(T newEntry) {
         Node newNode = new Node(newEntry);
-        newNode.next = node;
-        node = newNode;
+
+        if (isEmpty()) {
+            node = newNode;
+        }
+        else {
+            Node currentnode = node;
+            while (currentnode.getNext() != null) {
+                currentnode = currentnode.getNext();
+            }
+            currentnode.next = newNode;
+        } 
         numberOfEntries++;
     }
 
@@ -42,7 +51,7 @@ public class ADTLinkedList<T> {
 
     public T get(int position) {
         Node currentNode = node;
-        for (int i = 0; i < size() - position; i++) {
+        for (int i = 0; i < position; i++) {
             currentNode = currentNode.getNext();
         }
         return currentNode.getData();

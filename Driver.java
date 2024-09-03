@@ -1,5 +1,5 @@
 import graphpackage.Graph;
-import java.util.LinkedList;
+import adtpackage.*;
 
 class Driver {
     public static void main(String[] args) {
@@ -39,14 +39,14 @@ class Driver {
         System.out.println("3 <- 6 <- 9\n");
         
         System.out.print("Breadth First Search: ");
-        LinkedList<Integer> breadthFirst = graph.breadthFirstSearch(1);
-        for (int number : breadthFirst) {
-            System.out.print(number + " ");
+        ADTLinkedList<Integer> breadthFirst = graph.breadthFirstSearch(1);
+        for (int i = 0; i < breadthFirst.size(); i++) {
+            System.out.print(breadthFirst.get(i) + " ");
         }
         System.out.print("\nDepth First Search: ");
-        LinkedList<Integer> depthFirst = graph.depthFirstSearch(1);
-        for (int number : depthFirst) {
-            System.out.print(number + " ");
+        ADTLinkedList<Integer> depthFirst = graph.depthFirstSearch(1);
+        for (int i = 0; i < depthFirst.size(); i++) {
+            System.out.print(depthFirst.get(i) + " ");
         }
     }
 }
