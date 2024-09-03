@@ -19,11 +19,14 @@ import java.util.Stack;
 public class Graph<T> {
     private Map<T, LinkedList<T>> map = new HashMap<>();
 
+    //adds a vertex to the map
     public void addVertex(T key) {
         map.put(key, new LinkedList<T>());
     }
 
+    //adds an edge to the map
     public void addEdge(T src, T dst) {
+        //if the source and destination on the map doesn't exist, make one
         if (!hasVertex(src)) {
             addVertex(src);
         }
@@ -33,6 +36,7 @@ public class Graph<T> {
         map.get(src).add(dst);
     }
 
+    //return the edge count
     public int getEdgeCount() {
         int edges = 0;
         for (T vertex : map.keySet()) {
@@ -41,10 +45,12 @@ public class Graph<T> {
         return edges;
     }
 
+    //return the vertex count
     public int getVertexCount() {
         return map.size();
     }
 
+    //checks to see if the source and destination has an edge
     public boolean hasEdge(T src, T dst) {
         if (map.get(src).contains(dst)) {
             return true;
@@ -52,6 +58,7 @@ public class Graph<T> {
         return false;
     }
 
+    //checks to see if the map has the vertex
     public boolean hasVertex(T vertex) {
         if (map.containsKey(vertex)) {
             return true;
@@ -59,6 +66,7 @@ public class Graph<T> {
         return false;
     }
 
+    //returns a list of neighbors the vertex borders
     public LinkedList<T> getNeighbors(T vertex) {
         if (map.containsKey(vertex)) {
             return map.get(vertex);
